@@ -1,0 +1,14 @@
+.container{
+    margin: 15px;
+    border-radius: 10px ;
+    box-shadow: 10px 10px 20px #d7f8d37e;
+    width: 320px;
+    background-color: #4f92e9;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.cardImage{
+    /* width: 300px; */
+    height: auto;
+}

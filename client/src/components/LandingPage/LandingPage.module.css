@@ -1,0 +1,12 @@
+.paragraph{
+    /* position: relative; */
+    /* right: -25%; */
+    display: center;
+    /* justify-content: center; */
+    /* border: 2px; */
+    border-radius: 30px;
+    background-color: aliceblue;
+    width: 100%;
+    padding: 20px;
+    margin: 40%, 0, 40%, 0;
+}

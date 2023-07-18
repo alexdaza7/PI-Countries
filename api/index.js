@@ -23,7 +23,7 @@ const { conn, Country} = require('./src/db.js');
 const PORT = 3001;
 
 // Syncing all the models at once.
-conn.sync({ force: false })
+conn.sync({ alter: true })
 
 server.listen(PORT, async () => {
   console.log('Server raised in port: ' + PORT);

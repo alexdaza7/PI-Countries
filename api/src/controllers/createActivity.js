@@ -6,7 +6,7 @@ const createActivity = async ({
     dificulty, 
     duration, 
     season, 
-    // ids
+    ids
 })=>{
     const act = await Activity.create({
         id, 
@@ -16,8 +16,8 @@ const createActivity = async ({
         season
     });
 
-    // act.addCountry(ids);
-    // console.log('se ejecuto')
+    act.addCountry(ids);
+    console.log('se ejecuto')
 
     return act;
 }

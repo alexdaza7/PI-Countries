@@ -47,13 +47,6 @@ export function  setFilteredcountries(countries,checkCountries,checkActivities){
      } 
 }
 
-export function setFilteredcountries2(searchedCountries){
-return {
-  type: SET_FILTEREDCOUNTRIES, 
-  payload: searchedCountries,
-}
-}
-
 export function setSearchedCountry (name){
     return async function(dispatch){
         const response = await axios(`http://localhost:3001/countries?name=${name}`);

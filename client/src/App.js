@@ -35,16 +35,15 @@ function App() {
     <div className="App">
       <div>
         {
-          pathname !== '/' && <NavBar/>
+          pathname !== '/' && !pathname.includes('/detail') && <NavBar/>
         }
         <Routes>
           <Route path={'/'} element={<LandingPage/>}/>
           <Route path={'/home'} element={
-            <div style={{'display': 'flex'}}>
-              <SideBar/>
-              <Cards filteredCountries={filteredCountries}/>
-            </div>
-            }/>
+          <React.Fragment>
+            <SideBar/>
+            <Cards filteredCountries={filteredCountries}/>
+          </React.Fragment>}/>
           <Route path={'/detail/:ide'} element={<Detail countries={countries}/>}/>
           <Route path={'/NewActivity'} element={<h1><Form/></h1>}/>
           {/* <Route path={'/createActivity'} element={<NewActivity/>}/> */}

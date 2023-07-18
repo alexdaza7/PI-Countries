@@ -1,3 +1,23 @@
+*{
+margin:0;
+padding:0;
+}
+  
+ul{
+margin:0;
+padding:0;
+}
+  
+li{
+list-style: none;
+}
+  
+body{
+background-color: #eee;
+font-family: 'Lato', sans-serif;
+/* font-family: 'Montserrat', sans-serif; */
+}
+
 .container{
     width: 100%;
     display: flex;
@@ -9,3 +29,141 @@
     height: 600px;
     background-color: aliceblue;
 }
+
+.sideMenu{
+    position: fixed;
+    background-color: #fff;
+    width:360px;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 30px 30px;
+    transition: width 0.5s ease-in;
+}
+
+.sideMenu.inactive{
+    width: 100px;
+}
+
+.toggleIcon{
+    width: 30px;
+    height: 30px;
+}
+
+.sideMenu .topSection{
+    position: relative;
+}
+
+.sideMenu .topSection .logo{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.sideMenu .topSection .logo img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.sideMenu .topSection .toggleMenu{
+    color: #3333;
+    font-size: 20px;
+    position: absolute;
+    top:5px;
+    right: 0;
+    transform: translateY(-0%);
+    cursor: pointer;
+    transition: transform 0.3s ease-in;
+    transition: right 0.8s;
+}
+
+.sideMenu.inactive .topSection .toggleMenu{
+    right: -70px;
+    transform: rotate(180deg);
+    transition: transform 0.5s ease-in;
+    transition: right 0.8s;
+}
+
+.sideMenu .mainMenu .menuItem{
+    color: #333;
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+    font-weight: 600;
+    text-align:left;
+    cursor: pointer;
+    transition: margin-top .9s;
+}
+
+.sideMenu.inactive .mainMenu .menuItem{
+    pointer-events: none;
+    margin-top: 85px;
+    transition: margin-top .9s;
+}
+
+.sideMenu .mainMenu .menuItem .menuIcon{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align:center;
+}
+
+.sideMenu .mainMenu .menuItem span{
+    position: absolute;
+    display: inline-block;
+    line-height: 40PX;
+    opacity: 1;
+    transition: opacity .7s ease-in;
+}
+
+.sideMenu.inactive .mainMenu .menuItem span{
+    opacity: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity .7s ease-in;
+}
+
+.sideMenu .mainMenu .subMenu{
+    color: #333;
+    margin-left: 10px;
+    text-align:left;
+    border-left: 1px solid #666;
+    box-sizing: border-box;
+    padding: 0 10px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .5s;
+}
+
+.sideMenu .mainMenu .subMenu.active{
+    max-height: 250px;
+    transition: max-height .5s;
+}
+
+.sideMenu .mainMenu .subMenu label{
+    display: inline-block;
+    margin: 3px 0;
+} 
+
+.sideMenu .mainMenu .subMenu button{
+    display: inline-block;
+    margin: 5px;
+}
+
+
+/* .divider{
+    margin: 25px 0;
+    width: 100%;
+    height: 1px;
+    border-radius: 1px;
+    background-color: #333;
+} */
+
+/* .sideMenu .mainMenu .subMenu button{
+
+    display: inline-block;
+    margin: 5px;
+} */

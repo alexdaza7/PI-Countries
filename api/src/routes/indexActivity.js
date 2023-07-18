@@ -26,11 +26,11 @@ routesActivity.get('/',async (req,res)=>{
 
 routesActivity.post('/',async (req,res)=>{
     try {
-        const {id, name, dificulty, duration, season}=req.body;
+        const {id, name, dificulty, duration, season, ids}=req.body;
         // if(!id || !name || !dificulty || !duration || !season ){
         //     throw Error('datos incompletos')
         // }
-        let data = {id, name, dificulty, duration, season}
+        let data = {id, name, dificulty, duration, season, ids}
         let respuesta = await createActivity(data)
         res.status(201).json(respuesta)
         

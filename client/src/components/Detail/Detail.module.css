@@ -9,6 +9,7 @@
     color: #fff;
     opacity: 1;
     transition: opacity .6s;
+    animation: animacion .5s ease-in-out;
 }
 
 .modal__show{
@@ -68,6 +69,8 @@
     padding: 0.5em 1em;
     border-radius: 6px;
     border: 1px;
+    width: 70%;
+    font-size: 130%;
 }
 
 .modal__close{
@@ -93,3 +96,35 @@
 /* .modal--show{
 
 } */
+
+@media (max-width: 800px) {
+    
+    .modal__container{
+        display: grid;
+        overflow-y: scroll;
+        margin: 10vw;
+    }
+
+    .modal__informationContainer{
+        width: 50vw;
+    }
+    .modal__imageContainer{
+        text-align: center;
+        width: 50vw;
+    }
+
+    .modal__img{
+        width: 100%;
+    }
+}
+
+@keyframes animacion {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

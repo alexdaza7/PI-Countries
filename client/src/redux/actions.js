@@ -4,6 +4,7 @@ const SET_COUNTRIES='SET_COUNTRIES';
 const SET_FILTEREDCOUNTRIES='SET_FILTEREDCOUNTRIES';
 const SET_SEARCHEDCOUNTRY='SET_SEARCHEDCOUNTRY';
 const GET_ACTIVITIES='GET_ACTIVITIES';
+const SET_FORM='SET_FORM'
 
 
 export function setCountries(order){
@@ -59,4 +60,11 @@ export function getActivities (){
     const response = await axios('http://localhost:3001/activities');
     dispatch({type: GET_ACTIVITIES, payload: response.data})
 }
+}
+
+export function formActive (set){
+  return{
+    type:SET_FORM,
+    payload: set
+  }
 }

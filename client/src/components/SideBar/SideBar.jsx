@@ -1,7 +1,8 @@
 import styles from './SideBar.module.css'
 import React, { useState, useEffect } from "react";
 import {useDispatch, useSelector } from "react-redux";
-import { setFilteredcountries, getActivities, setCountries} from '../../redux/actions';
+import { setFilteredcountries, getActivities, setCountries, formActive} from '../../redux/actions';
+import { Link } from 'react-router-dom';
 import SubMenu from './SubMenu/SubMenu';
 import earth from '../../assets/earth.png'
 import arrow from '../../assets/arrow.png'
@@ -30,12 +31,13 @@ export default function SideBar(props){
     // const filteredCountries = useSelector(state=>state.filteredCountries)
     const countries = useSelector(state=>state.countries)
     const allActivities = useSelector(state=>state.allActivities)
+    const formStatus = useSelector(state=>state.formStatus)
 
     //este efecto es para cargar por primera vez el array de paises
     useEffect(()=>{
         dispatch(getActivities())
         deleteFilter()
-    },[])
+    },[formStatus])
     //esta funcion es para guardar cuales son los filtros de continentes aplicados al presionar un checkbox
     const filterCountries= (event) =>{
         const {checked}=event.target
@@ -91,7 +93,7 @@ export default function SideBar(props){
          dispatch(setCountries(query));
     }
 
-    const [inactive,setIianctive]=useState(false)
+    const [inactive,setIianctive]=useState(true)
     const [orderExpanded,setOrderExpanded]=useState(false)
     const [filterExpanded,setFiilterExpanded]=useState(false)
     const [activitiesExpanded,setActivitiesExpanded]=useState(false)
@@ -108,7 +110,7 @@ export default function SideBar(props){
                         setIianctive(!inactive); 
                         setOrderExpanded(false);
                         setFiilterExpanded(false);
-                        setActivitiesExpanded(false)
+                        setActivitiesExpanded(false);
                         }} 
                     className={styles.toggleIcon} src={arrow} alt="toggle menu" />
                 </div>
@@ -131,60 +133,77 @@ export default function SideBar(props){
                         <div className={styles.menuIcon}>
                             <img src={create} alt="create icon" />  
                         </div>
-                        <span>CREAR ACTIVIDAD</span>
+                        <span onClick={()=>dispatch(formActive(true))}>CREAR ACTIVIDAD</span>
                         </a>
                     </li>
                     <li>
-                        <a onClick={()=>setOrderExpanded(!orderExpanded)} className={styles.menuItem}>                        
+                        <div>
+                        <a onClick={()=>{
+                            setOrderExpanded(!orderExpanded)
+                            setFiilterExpanded(false);
+                            setActivitiesExpanded(false);}} 
+                            className={styles.menuItem}>
+
                             <div className={styles.menuIcon}>
                                 <img src={list} alt="list icon" />
                             </div>
                             <span>ORDENAR</span>
                         </a>
                         <ul className={`${styles.subMenu} ${orderExpanded ? styles.active: '' }`}>
+                            <button onClick={applyFilters}>ORDENAR</button>
                         {
                             options.map(option =>{
                                 return(
                                 <li key={option.id}>
                                     <input type='radio' id={option.id} name='order' value={option.id} onChange={setOrder}/>
-                                    <label htmlFor={option.value}>{option.name}</label> 
+                                    <label htmlFor={option.id}>{option.name}</label> 
                                 </li>
                                 )
                             })
                         }
-                        <button onClick={applyFilters}>ORDENAR</button>
                         </ul>
+                        </div>
                     </li>
                     <li>
-                        <a onClick={()=>setFiilterExpanded(!filterExpanded)} className={styles.menuItem}>                        
+                        <a onClick={()=>{
+                            setOrderExpanded(false)
+                            setFiilterExpanded(!filterExpanded);
+                            setActivitiesExpanded(false);}} 
+                            className={styles.menuItem}>                        
                             <div className={styles.menuIcon}>
                                 <img src={filter} alt="filter icon" />
                             </div>
                             <span>FILTRO POR CONTINENTES</span>
                         </a>
                         <ul className={`${styles.subMenu} ${filterExpanded ? styles.active: '' }`}>
+                            <button onClick={deleteFilter}>X</button>
+                            <button onClick={applyFilters}>✔</button>
                         {
                             continents.map(option =>{
                                 return(
                                 <li key={option.id}>
                                     <input type='checkbox' id={option.id} name={option.id} value={option.id} onChange={filterCountries}/>
-                                    <label htmlFor={option.value}>{option.name}</label> 
+                                    <label htmlFor={option.id}>{option.name}</label> 
                                 </li>
                                 )
                             })
                         }
-                        <button onClick={deleteFilter}>ELIMINAR FILTROS</button>
-                        <button onClick={applyFilters}>APLICAR FILTROS</button>
                         </ul>
                     </li>
                     <li>
-                        <a onClick={()=>setActivitiesExpanded(!activitiesExpanded)} className={styles.menuItem}>                        
+                    <a onClick={()=>{
+                            setOrderExpanded(false)
+                            setFiilterExpanded(false);
+                            setActivitiesExpanded(!activitiesExpanded);}} 
+                            className={styles.menuItem}>                           
                             <div className={styles.menuIcon}>
                                 <img src={filter2} alt="filter icon" />
                             </div>
                         <span>FILTRO POR ACTIVIDADES</span>
                         </a>
                         <ul className={`${styles.subMenu} ${activitiesExpanded ? styles.active: '' }`}>
+                            <button onClick={deleteFilter}>X</button>
+                            <button onClick={applyFilters}>✓</button>
                             {allActivities.map(activity => {
                                 return(
                                 <li key={activity.id}>
@@ -193,8 +212,6 @@ export default function SideBar(props){
                                 </li>)
                             })
                             }
-                        <button onClick={deleteFilter}>ELIMINAR FILTROS</button>
-                        <button onClick={applyFilters}>APLICAR FILTROS</button>
                         </ul>
                     </li>
                 </ul>

@@ -1,51 +1,146 @@
-div{
-    display:inline-block;
+
+.LandingTitle {
+  color: white;
+  font-family: 'kanit';
+  margin: 2vh 0;
+  font-size: 10vw;
+  text-align: center;
+  transition: text-shadow 0.6s ease; /* Agrega una transición al sombreado del texto */
 }
-.NavBar {
-    height: 60px;
-    background: linear-gradient(#1C4C52,#4FE993);
-    margin: 0 0 30px 0;
-    border-radius: 30px;
-    padding: 0;
+
+.LandingTitle:hover{
+  text-shadow: 0 0 5px  #9500ffa8, 0 0 10px #0099ffc4, 0 0 15px #00ddffb8;
+}
+
+.title{
+  margin-top: 0vh;
+  margin-bottom: -1vh;
+  font-family: 'Kanit';
+  color: white;
+  font-size: 8vw;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 15vh;
+  transition: text-shadow 0.3s ease;
+}
+.title:hover{
+  transition: text-shadow 0.3s ease;
+  text-shadow: 0 0 5px  #9500ffa8, 0 0 10px #0099ffc4, 0 0 15px #00ddffb8;
+}
+
+.searchBar {
+  margin-top: 2vh;
+  display: grid;
+  grid-template-areas: 'prevButton searchBox cancelButton searchButton nextButton';
+  align-items: center;
+  justify-content: center;
 }
 
 .SearchBox {
-    margin: 0 15px 0 0;
-    height: 30px;
-    width: 300px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  width: 50vw;
+  background-color: white;
+  height: 100%;
+}
+
+.searchButton,
+.cancelButton{
+  width: 5vh;
+  height: 100%;
+  padding: 0.1vw;
+  border: none;
+  background-color: white;
+  border-left: #33333340 solid 0.5px;
+  /* background-color: #007bff;
+  color: white;
+  cursor: pointer; */
+}
+
+.searchButton{
+  border-radius: 0 4px 4px 0;
+  /* width: 3vw; */
+  height: 100%;
+}
+
+.prevButton,
+.nextButton {
+  width: 5vh;
+  max-width: 3vw;
+  margin: 0 8px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.prevButton:hover{
+  transform: translateX(-10px);
+  transition: transform 0.3s ease;
+}
+.nextButton:hover{
+  transform: translateX(10px);
+  transition: transform 0.3s ease;
+}
+
+.searchButton:hover,
+.cancelButton:hover {
+  background-color: #ced0d3;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
     display: none;
 }
-/* .SearchButton{
-    background-color: lightblue;
-    border: 0;
-    height: 30px;
-    margin: 0 15px 0 0;
-    cursor: pointer;
-} */
 
-/* .RandomButton {
-    background-color: lightblue;
-    border: 0;
-    height: 30px;
-} */
-.Button {
-    /* position: relative;
-    bottom: -12px; */
-    left: 200px;
-    background: linear-gradient(#1C4C52,#4FE993);
-    border: 0;
-    height: 30px;
-    margin: 0 0 0 0;
-    height: 60px;
-    font-family: 'Itim', cursive;
-    font-size: 18PX;
-    cursor: pointer;
-}
 
-.Button:hover{
-    background: linear-gradient(#4FE993,#1C4C52);
+@media (max-width: 600px) {
+
+  .searchBar {
+    display: grid;
+    grid-template-areas: 
+    "searchBox cancelButton searchButton"
+    "prevButton . nextButton";
+    align-items: center;
+    justify-content: center;
+  }
+  /* .searchBar,
+  .searchButton,
+  .cancelButton{
+    grid-row: 1;
+  }*/
+  .prevButton{
+    translate: 20vw;
+  }
+  .nextButton{
+    translate: -20vw;
+  }
+
+  .prevButton,
+  .nextButton {
+    margin: 1vh;
+    grid-row: 2;
+    /* margin: 0px; */
+  }
+  
+  /*
+  .searchBar,
+  .prevButton{
+    grid-column: 1;
+  }
+  */
+  .nextButton,
+  .searchButton{
+    grid-column: 3;
+  }
+/*
+  .cancelButton{
+    grid-column: 2;
+  } */
 }
 

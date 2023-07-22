@@ -1,12 +1,70 @@
-.paragraph{
-    /* position: relative; */
-    /* right: -25%; */
-    display: center;
-    /* justify-content: center; */
-    /* border: 2px; */
-    border-radius: 30px;
-    background-color: aliceblue;
-    width: 100%;
-    padding: 20px;
-    margin: 40%, 0, 40%, 0;
+.LandingPage {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+
 }
+ .LandingHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  background: url(../../assets/atardecer.mp4) no-repeat center center fixed;
+  background-size: cover;
+}
+ .LandingTitle {
+  color: white;
+  font-family: 'kanit';
+  margin: 2vh 0;
+  font-size: 10vw;
+  text-align: center;
+  transition: text-shadow 0.6s ease; /* Agrega una transición al sombreado del texto */
+}
+
+.LandingTitle:hover{
+  text-shadow: 0 0 5px  #9500ffa8, 0 0 10px #0099ffc4, 0 0 15px #00ddffb8;
+}
+ .LandingHeader:hover {
+  background-color: transparent;
+}
+ .LandingAbout {
+  color: white;
+  padding: 0px;
+  text-align: center;
+}
+ .LandingSubtitle {
+  font-size: 24px;
+}
+ .LandingParagraph {
+  padding: 0 9vw;
+  font-size: 3vh;
+  text-align: justify;
+}
+ .LandingStart {
+  border: 0;
+  background-image: linear-gradient(
+    150deg,
+    #9500ff,
+    #09f,
+    #00ddff);
+    border-radius: 8px;
+    color: white;
+    /* display:flex; */
+    font-size: 5vh;
+    padding: 2.3vh 0.75vh;
+    cursor: pointer;
+    transition: .3s;
+  }
+  .LandingButton{
+    border-radius: 8px;
+    background-color: #111;
+    padding: 1.5vh 3vh;
+    transition: .3s;
+  }
+  .LandingButton:hover{
+    background: none;
+  }
+ /* .LandingStart:hover {
+  background-color: #990000;
+} */

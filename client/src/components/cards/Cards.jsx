@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Card from "../Card/Card";
 import styles from "./Cards.module.css";
+import NavBar from "../NavBar/NavBar";
 
 
 export default function Cards(props){
     const {filteredCountries}=props
     const [page,setPage]=useState(10)
     const [tenElements,setTenElements]=useState([])
+    const formStatus = useSelector(state=>state.formStatus)
 
     useEffect(()=>{
         setTenElements(filteredCountries.slice(0,10));
@@ -29,9 +32,11 @@ export default function Cards(props){
     }
 
     return (
-        <div>
-            <button onClick={previousPage}>PAGINA ANTERIOR</button>
-            <button onClick={nextPage}>SIGUIENTE PAGINA</button>
+        <div className={`${styles.allContainer} ${formStatus? styles.active : '' }`}>
+            <div className={styles.navContainer}>
+            <NavBar previousPage={previousPage} nextPage={nextPage}/>
+
+            </div>
 
             <div className={styles.cardContainer}>
             {tenElements.map (country => {

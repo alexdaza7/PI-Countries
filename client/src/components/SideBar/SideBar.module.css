@@ -1,8 +1,8 @@
-*{
+/* *{
 margin:0;
 padding:0;
 }
-  
+   */
 ul{
 margin:0;
 padding:0;
@@ -12,31 +12,21 @@ li{
 list-style: none;
 }
   
-body{
+/* body{
 background-color: #eee;
 font-family: 'Lato', sans-serif;
-/* font-family: 'Montserrat', sans-serif; */
-}
-
-.container{
-    width: 100%;
-    display: flex;
-}
-
-.filterContainer{
-    width: 300px;
-    padding: 0px 40px;
-    height: 600px;
-    background-color: aliceblue;
-}
+font-family: 'Montserrat', sans-serif;
+} */
 
 .sideMenu{
-    position: fixed;
+    grid-column: 1;
+    position: sticky;
+    top: 0;
     background-color: #fff;
-    width:360px;
-    height: 100%;
+    width:320px;
+    height: 100vh;
     box-sizing: border-box;
-    padding: 30px 30px;
+    padding: 20px 5px 20px 30px;
     transition: width 0.5s ease-in;
 }
 
@@ -45,24 +35,38 @@ font-family: 'Lato', sans-serif;
 }
 
 .toggleIcon{
-    width: 30px;
-    height: 30px;
+    width: 50%;
+    height: 50%;
+    max-width: 50px;
+    min-width: 20px;
+
 }
 
 .sideMenu .topSection{
     position: relative;
-}
-
-.sideMenu .topSection .logo{
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    display: inline-block;
+    max-height: 20vh;
 }
 
 .sideMenu .topSection .logo img{
+    margin-left: .5vw;
+    width: 75%;
+    height: 75%;
+    max-width: 50px;
+    min-width: 20px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: inline-block;
+    transition: margin-top .9s;
+}
+
+/* .sideMenu .topSection .logo img{
     max-width: 100%;
     max-height: 100%;
+} */
+
+.sideMenu.inactive .topSection .logo img{
+    margin-top: 12vh;
+    transition: margin-top .9s;
 }
 
 .sideMenu .topSection .toggleMenu{
@@ -70,7 +74,7 @@ font-family: 'Lato', sans-serif;
     font-size: 20px;
     position: absolute;
     top:5px;
-    right: 0;
+    right: 40px;
     transform: translateY(-0%);
     cursor: pointer;
     transition: transform 0.3s ease-in;
@@ -78,13 +82,14 @@ font-family: 'Lato', sans-serif;
 }
 
 .sideMenu.inactive .topSection .toggleMenu{
-    right: -70px;
+    right: 20px;
     transform: rotate(180deg);
     transition: transform 0.5s ease-in;
     transition: right 0.8s;
 }
 
 .sideMenu .mainMenu .menuItem{
+    background-color: #fff;
     color: #333;
     text-decoration: none;
     font-size: 15px;
@@ -95,19 +100,28 @@ font-family: 'Lato', sans-serif;
     transition: margin-top .9s;
 }
 
+.sideMenu .mainMenu .menuItem:hover{
+    background-color: #e6e6e6;
+    color: #333;
+    transition: color .2s;
+}
+
 .sideMenu.inactive .mainMenu .menuItem{
     pointer-events: none;
-    margin-top: 85px;
+    margin-top: 8vh;
     transition: margin-top .9s;
 }
 
 .sideMenu .mainMenu .menuItem .menuIcon{
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 75%;
+    height: 75%;
+    max-width: 50px;
     font-size: 20px;
     line-height: 40px;
     text-align:center;
+    /* padding-left: 10%; */
+    
 }
 
 .sideMenu .mainMenu .menuItem span{
@@ -135,13 +149,32 @@ font-family: 'Lato', sans-serif;
     padding: 0 10px;
     max-height: 0px;
     overflow: hidden;
-    transition: max-height .5s;
+    transition: max-height .8s;
+}
+.sideMenu .mainMenu .subMenu.active{
+    max-height: 400px;
+    overflow-y: scroll;
+    transition: max-height .8s;
+}
+.sideMenu .mainMenu .subMenu button{
+    display: inline-block;
+    align-items: center;
+    padding: 1vh 6vh;
+    background-color: #f2f2f2;
+    color: #333;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
-.sideMenu .mainMenu .subMenu.active{
-    max-height: 250px;
-    transition: max-height .5s;
+.sideMenu .mainMenu .subMenu button:hover {
+    background-color: #333;
+    color: #f2f2f2;
+    transition: color .2s;
 }
+
 
 .sideMenu .mainMenu .subMenu label{
     display: inline-block;
@@ -151,6 +184,24 @@ font-family: 'Lato', sans-serif;
 .sideMenu .mainMenu .subMenu button{
     display: inline-block;
     margin: 5px;
+}
+
+@media (max-width: 600px) {
+
+    .sideMenu{
+        align-content: center;
+        width: 100vw;
+        min-width: 60px;
+        padding: 20px 5px 20px 20%;
+    }
+    .toggleIcon{
+        margin-left: -2vw;
+    }
+
+    .sideMenu.inactive{
+        width: 15vw;
+        min-width: 60px;
+    }
 }
 
 

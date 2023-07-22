@@ -4,6 +4,7 @@ const initiaState ={
     filteredCountries:[],
     searchedCountries:[],
     allActivities:[],
+    formStatus:false,
 }
 
 const rootReducer = (state=initiaState, action)=>{
@@ -32,6 +33,12 @@ const rootReducer = (state=initiaState, action)=>{
             return{
                 ...state,                
                 allActivities: action.payload
+            }
+
+        case 'SET_FORM':
+            return{
+                ...state,
+                formStatus: action.payload
             }
 
         default:

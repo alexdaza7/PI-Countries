@@ -33,22 +33,21 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        {
-          pathname !== '/' && !pathname.includes('/detail') && <NavBar/>
-        }
+        {/* {
+          pathname !== '/' && !pathname.includes('/detail') && <NavBar  className='searchBar'/>
+        } */}
         <Routes>
           <Route path={'/'} element={<LandingPage/>}/>
           <Route path={'/home'} element={
           <React.Fragment>
-            <SideBar/>
-            <Cards filteredCountries={filteredCountries}/>
+            <SideBar className='SideBar'/>
+            <Cards className='content' filteredCountries={filteredCountries}/>
           </React.Fragment>}/>
           <Route path={'/detail/:ide'} element={<Detail countries={countries}/>}/>
-          <Route path={'/NewActivity'} element={<h1><Form/></h1>}/>
+          {/* <Route path={'/NewActivity'} element={<h1><Form/></h1>}/> */}
           {/* <Route path={'/createActivity'} element={<NewActivity/>}/> */}
         </Routes>
-      </div>
+        <Form/>
     </div>
   );
 }

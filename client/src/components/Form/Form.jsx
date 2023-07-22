@@ -2,8 +2,13 @@ import react, {useState} from 'react';
 import axios from 'axios';
 import styles from './Form.module.css'
 import {useDispatch, useSelector } from "react-redux";
+import{formActive} from '../../redux/actions';
+import activities from '../../assets/activities.png'
 
 export default function Form(){
+
+    const dispatch = useDispatch()
+    const formStatus = useSelector(state=>state.formStatus)
 
     const [newActivity, setNewActivity]=useState({
         name:'',
@@ -12,6 +17,8 @@ export default function Form(){
         season:'',
         ids:[],
     })
+    const [selectedCountries,setSelectedCountries]=useState([]);
+
     const countries = useSelector(state=>state.countries)
 
     const sendData = async (newActivity) =>{
@@ -35,13 +42,8 @@ export default function Form(){
                 ...newActivity,
                 ids:[...newActivity.ids, event.target.value]
             })
-
             let found = countries.find(country => country.ide === event.target.value)
-            let selectedCountry = document.querySelector('#countriesShow');
-            let newCountry = document.createElement('p')
-            newCountry.textContent= found.name
-            selectedCountry.appendChild(newCountry)
-            console.log(newActivity)
+            setSelectedCountries([...selectedCountries, found])
         }
     }
 
@@ -54,68 +56,93 @@ export default function Form(){
 
     return(
 
-        <form className={styles.Form} action="">
+        <section className={`${styles.modalFormSection} ${formStatus? styles.active : '' }`}>
+            <div className={styles.modalFormContainer}>
+                <img className={styles.modalImage} src={activities} alt="imagen de actividades" />
+                <div className={styles.modalInformation}>
+                    <div className={styles.modalTitle}>
+                        <h1 className={styles.formTitle}>NUEVA ACTIVIDAD</h1>
+                        <button className={styles.exitButton} onClick={()=>dispatch(formActive(false))}>X</button>
+                    </div>
+                    <form className={styles.modalForm} action="">
+                        <div className={styles.inputContainer}>
+                            <label htmlFor="name" className={styles.textBox}>Nombre: * </label>
+                            <input 
+                                id='name' 
+                                name='name' 
+                                placeholder="Digita el nombre de la actividad"
+                                type="text" 
+                                value={newActivity.name}
+                                onChange={handleInputChange}
+                                />
+                            <br />
+                        </div>
 
-            <label htmlFor="name" className={styles.textBox}>Activity name: </label>
-            <input 
-                id='name' 
-                name='name' 
-                placeholder="Digita el nombre de la actividad"
-                type="text" 
-                value={newActivity.name}
-                onChange={handleInputChange}
-            />
-            <br />
+                        <div className={styles.inputContainer}>
+                            <label htmlFor="dificulty" className={styles.textBox}>dificultad: * </label>
+                            <input 
+                                id='dificulty' 
+                                name='dificulty' 
+                                type="range"
+                                min="0"
+                                max="5"
+                                value={newActivity.dificulty}
+                                onChange={handleInputChange}
+                                />
+                            <span>{newActivity.dificulty}</span>
+                        </div>
 
-            <label htmlFor="dificulty" className={styles.textBox}>dificulty: </label>
-            <input 
-                id='dificulty' 
-                name='dificulty' 
-                type="range"
-                min="0"
-                max="5"
-                value={newActivity.dificulty}
-                onChange={handleInputChange}
-            />
-            <span>{newActivity.dificulty}</span>
-            <br />
+                        <div className={styles.inputContainer}>
+                            <label htmlFor="duration" className={styles.textBox}>duration: </label>
+                            <input 
+                                id='duration' 
+                                name='duration' 
+                                type="time"
+                                step='1'
+                                value={newActivity.duration}
+                                onChange={handleInputChange}
+                            />
+                        </div>
 
+                        <div className={styles.inputContainer}>
+                            <label htmlFor="season" className={styles.textBox}>season: </label>
+                            <select name="season" onChange={handleInputChange}>
+                                <option value="Verano">Verano</option>
+                                <option value="Otoño">Otoño</option>
+                                <option value="Invierno">Invierno</option>
+                                <option value="Primavera">Primavera</option>
+                                <option value="Verano">Verano</option>
+                            </select>
+                        </div>
 
-            <label htmlFor="duration" className={styles.textBox}>duration: </label>
-            <input 
-                id='duration' 
-                name='duration' 
-                type="time"
-                step='1'
-                value={newActivity.duration}
-                onChange={handleInputChange}
-            />
-            <br />
-            
-            <label htmlFor="season" className={styles.textBox}>season: </label>
-            <select name="season" onChange={handleInputChange}>
-                <option value="Verano">Verano</option>
-                <option value="Otoño">Otoño</option>
-                <option value="Invierno">Invierno</option>
-                <option value="Primavera">Primavera</option>
-                <option value="Verano">Verano</option>
-            </select>
-            <br />
-
-            <label htmlFor="ids" className={styles.textBox}>ids</label>
-            <select name='paises' onChange={handleSelectChange}>
-                {
-                    countries.map(element => {
-                        return (
-                            <option key={element.ide} value={element.ide} name={element.name}>
-                                {element.name}
-                            </option>
-                        )
-                    })
-                }
-            </select>
-            <p id='countriesShow' >Paises seleccionados: </p>
-            <button style={{cursor:'pointer'}} onClick={handleSubmit}>CREATE</button>
-        </form>
+                        <div className={styles.inputContainer}>
+                        <label htmlFor="ids" className={styles.textBox}>ids</label>
+                            <select name='paises' onChange={handleSelectChange}>
+                                {
+                                    countries.map(element => {
+                                        return (
+                                            <option key={element.ide} value={element.ide} name={element.name}>
+                                                {element.name}
+                                            </option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        </div>
+                        <div className={styles.inputContainer}>
+                        <p id='countriesShow' >Paises seleccionados: </p>
+                        {
+                            selectedCountries.map(c=>{
+                                return(
+                                    <p>{c.name}</p>
+                                )
+                            })
+                        }
+                        </div>
+                        <button style={{cursor:'pointer'}} onClick={handleSubmit}>CREATE</button>
+                    </form>
+                </div>
+            </div>
+        </section>
     )
 }

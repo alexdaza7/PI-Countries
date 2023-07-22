@@ -1,3 +1,30 @@
-.cardContainer{
 
+.allContainer{
+    grid-column: 2;
+}
+
+.allContainer.active{
+    overflow: hidden;
+}
+
+.navButton{
+    margin-top: 20px;
+    width: 50vh;
+    display: inline-block;
+    align-items: center;
+    padding: 1vh 6vh;
+    background-color: #f2f2f2;
+    color: #333;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-left: 60px;
+}
+
+.navButton:hover {
+    background-color: #333;
+    color: #f2f2f2;
+    transition: color .2s;
 }

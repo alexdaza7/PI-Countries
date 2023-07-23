@@ -120,14 +120,14 @@ export default function SideBar(props){
 
             <div className={styles.mainMenu}>
                 <ul>
-                    <li>
+                    {/* <li>
                         <a className={styles.menuItem}>                        
                         <div className={styles.menuIcon}>
                             <img src={home} alt="home icon" />
                         </div>
                         <span>INICIO</span>
                         </a>
-                    </li>
+                    </li> */}
                     <li>
                         <a className={styles.menuItem}>                            
                         <div className={styles.menuIcon}>

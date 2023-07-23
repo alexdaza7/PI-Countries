@@ -35,3 +35,16 @@
     max-height: 75vh;
     overflow-y: scroll;
 }
+
+.warning{
+    border-radius: 1vh;
+    padding: 2vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-size: 4vh;
+    position: absolute;
+    color: white;
+    left: 40vw;
+    top: 50vh;
+
+
+}

@@ -39,17 +39,20 @@ export default function Cards(props){
             </div>
 
             <div className={styles.cardContainer}>
-            {tenElements.map (country => {
-                return (
-                    <Card
-                    key={country.ide}
-                    ide={country.ide}
-                    name={country.name}
-                    flagImage={country.flagImage}
-                    continente={country.region}
-                    />   
-                )
-            })}
+                {tenElements.map (country => {
+                    return (
+                        <Card
+                        key={country.ide}
+                        ide={country.ide}
+                        name={country.name}
+                        flagImage={country.flagImage}
+                        continente={country.region}
+                        />   
+                    )
+                })}
+            </div>
+            <div>
+                {(tenElements.length<1)? <p className={styles.warning}> Ops... no se han encontrado coincidencias </p>:<></>}
             </div>
         </div>
     )

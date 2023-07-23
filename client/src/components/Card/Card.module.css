@@ -19,6 +19,9 @@
     transition: width .3s ease-out;
 
 }
+.card{
+    position: relative;
+}
 .country{
     position: absolute;
     padding-left: 20px;

@@ -28,3 +28,10 @@
     color: #f2f2f2;
     transition: color .2s;
 }
+
+.cardContainer{
+    border-radius: 2vw;
+    margin-top: 2vh;
+    max-height: 75vh;
+    overflow-y: scroll;
+}

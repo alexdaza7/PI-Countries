@@ -58,29 +58,30 @@ export default function Form(){
 
         <section className={`${styles.modalFormSection} ${formStatus? styles.active : '' }`}>
             <div className={styles.modalFormContainer}>
-                <img className={styles.modalImage} src={activities} alt="imagen de actividades" />
+                {/* <img className={styles.modalImage} src={activities} alt="imagen de actividades" /> */}
                 <div className={styles.modalInformation}>
                     <div className={styles.modalTitle}>
                         <h1 className={styles.formTitle}>NUEVA ACTIVIDAD</h1>
-                        <button className={styles.exitButton} onClick={()=>dispatch(formActive(false))}>X</button>
                     </div>
                     <form className={styles.modalForm} action="">
                         <div className={styles.inputContainer}>
                             <label htmlFor="name" className={styles.textBox}>Nombre: * </label>
-                            <input 
+                            <input
+                                className={styles.inputBox} 
                                 id='name' 
                                 name='name' 
                                 placeholder="Digita el nombre de la actividad"
                                 type="text" 
                                 value={newActivity.name}
                                 onChange={handleInputChange}
-                                />
-                            <br />
+                            />
                         </div>
 
                         <div className={styles.inputContainer}>
                             <label htmlFor="dificulty" className={styles.textBox}>dificultad: * </label>
+                            <div style={{display:'flex'}}>
                             <input 
+                                className={styles.inputBox}
                                 id='dificulty' 
                                 name='dificulty' 
                                 type="range"
@@ -90,11 +91,13 @@ export default function Form(){
                                 onChange={handleInputChange}
                                 />
                             <span>{newActivity.dificulty}</span>
+                            </div>
                         </div>
 
                         <div className={styles.inputContainer}>
                             <label htmlFor="duration" className={styles.textBox}>duration: </label>
                             <input 
+                                className={styles.inputBox}
                                 id='duration' 
                                 name='duration' 
                                 type="time"
@@ -106,7 +109,7 @@ export default function Form(){
 
                         <div className={styles.inputContainer}>
                             <label htmlFor="season" className={styles.textBox}>season: </label>
-                            <select name="season" onChange={handleInputChange}>
+                            <select className={styles.inputBox} name="season" onChange={handleInputChange}>
                                 <option value="Verano">Verano</option>
                                 <option value="Otoño">Otoño</option>
                                 <option value="Invierno">Invierno</option>
@@ -117,7 +120,7 @@ export default function Form(){
 
                         <div className={styles.inputContainer}>
                         <label htmlFor="ids" className={styles.textBox}>ids</label>
-                            <select name='paises' onChange={handleSelectChange}>
+                            <select className={styles.inputBox2} name='paises' onChange={handleSelectChange}>
                                 {
                                     countries.map(element => {
                                         return (
@@ -130,17 +133,26 @@ export default function Form(){
                             </select>
                         </div>
                         <div className={styles.inputContainer}>
-                        <p id='countriesShow' >Paises seleccionados: </p>
-                        {
-                            selectedCountries.map(c=>{
-                                return(
-                                    <p>{c.name}</p>
-                                )
-                            })
-                        }
+                            <p className={styles.textBox} >Paises seleccionados: </p>
+                            <div className={styles.selecCountries}>
+                                {
+                                selectedCountries.map(c=>{
+                                    return(
+                                        <p>{c.name}</p>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
-                        <button style={{cursor:'pointer'}} onClick={handleSubmit}>CREATE</button>
                     </form>
+                        <div className={styles.formButtons}>
+                            <button className={styles.formButton} onClick={()=>dispatch(formActive(false))}>
+                                <span className={styles.textButton}>DESCARTAR</span>
+                            </button>
+                            <button  className={styles.formButton} style={{cursor:'pointer'}} onClick={handleSubmit}>
+                                <span className={styles.textButton}>CREAR</span>
+                            </button>
+                        </div>
                 </div>
             </div>
         </section>

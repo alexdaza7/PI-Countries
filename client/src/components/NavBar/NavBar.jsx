@@ -55,7 +55,3 @@ export default function NavBar (props){
    </div>
     )
   }
-
-//   <input type="text" placeholder="Buscar..." className={styles.SearchBox}>
-//   <button className={styles.cancelButton}>Buscar</button>
-//   <button className={styles.searchButton}>Cancelar</button>

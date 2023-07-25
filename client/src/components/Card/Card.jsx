@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 
 export default function Card (props){
+    
     const {flagImage, name, continente, ide}=props
 
     return(

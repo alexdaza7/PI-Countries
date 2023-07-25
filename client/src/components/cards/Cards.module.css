@@ -29,10 +29,18 @@
     transition: color .2s;
 }
 
+.paginado{
+    margin-top: 1vh;
+    margin-right: 4vw;
+    color: white;
+    text-align: end;
+    font-size: 2vh;
+}
+
 .cardContainer{
     border-radius: 2vw;
     margin-top: 2vh;
-    max-height: 75vh;
+    max-height: 65vh;
     overflow-y: scroll;
 }
 
@@ -45,6 +53,4 @@
     color: white;
     left: 40vw;
     top: 50vh;
-
-
 }

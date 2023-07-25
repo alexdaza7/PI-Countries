@@ -5,14 +5,15 @@ import styles from "./Cards.module.css";
 import NavBar from "../NavBar/NavBar";
 
 
-export default function Cards(props){
-    const {filteredCountries}=props
+export default function Cards(){
     const [page,setPage]=useState(10)
-    const [tenElements,setTenElements]=useState([])
-    const formStatus = useSelector(state=>state.formStatus)
+    const [tenElements,setTenElements]=useState([]);
+    const formStatus = useSelector(state=>state.formStatus);
+    const filteredCountries=useSelector(state=>state.filteredCountries);
 
     useEffect(()=>{
         setTenElements(filteredCountries.slice(0,10));
+        setPage(10)
     },[filteredCountries])
 
     const nextPage = ()=>{
@@ -35,7 +36,8 @@ export default function Cards(props){
         <div className={`${styles.allContainer} ${formStatus? styles.active : '' }`}>
             <div className={styles.navContainer}>
             <NavBar previousPage={previousPage} nextPage={nextPage}/>
-
+            <p className={styles.paginado}>esta es la pagina {(page/10)} de {Math.ceil(filteredCountries.length/10)}</p>
+            <p className={styles.paginado}>Paises totales: {filteredCountries.length}</p>
             </div>
 
             <div className={styles.cardContainer}>

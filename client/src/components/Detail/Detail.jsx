@@ -2,19 +2,17 @@ import React, { useState, useEffect } from "react";
 import styles from "./Detail.module.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import {useSelector } from "react-redux";
 
-export default function Detail (props){
+export default function Detail (){
 
-    const {countries}=props
     const {ide}= useParams();
     const [detailCountry, setDetailCountry] = useState({});
+    const countries = useSelector(state=>state.countries);
 
     useEffect(() => {
-      console.log(ide)
-      console.log(countries)
       const foundCountry = countries.find(country=> country.ide===ide)
       setDetailCountry(foundCountry)
-      console.log(foundCountry)
       },[ide,countries]);
 
     return (
@@ -26,14 +24,18 @@ export default function Detail (props){
               <h2 className={styles.modal__ide}>{detailCountry.ide}</h2>
             </div>
             <div className={styles.modal__informationContainer}>
-                <h2 className={styles.modal__informationTitle}>INFORMACION:</h2>
-                <h3 className={styles.modal__information}>Continente: {detailCountry.region}</h3>
-                <h3 className={styles.modal__information}>Capital: {detailCountry.capital}</h3>
-                <h3 className={styles.modal__information}>Sub Region: {detailCountry.subRegion}</h3>
-                <h3 className={styles.modal__information}>Area: {detailCountry.area} m2</h3>
-                <h3 className={styles.modal__information}>Poblacion: {detailCountry.population} hab</h3>
+                <div>
+                  <h2 className={styles.modal__informationTitle}>INFORMACION:</h2>
+                  <h3 className={styles.modal__information}>Continente: {detailCountry.region}</h3>
+                  <h3 className={styles.modal__information}>Capital: {detailCountry.capital}</h3>
+                  <h3 className={styles.modal__information}>Sub Region: {detailCountry.subregion}</h3>
+                  <h3 className={styles.modal__information}>Area: {detailCountry.area} m2</h3>
+                  <h3 className={styles.modal__information}>Poblacion: {detailCountry.population} hab</h3>
+                </div>
                 <Link  strict to={`/home`}>
-                  <a className={styles.modal__close} onClick={console.log('me hacen click')} >Volver al menu</a>
+                  <button className={styles.modal__closeContainer} >
+                    <span className={styles.modal__close} >Volver al menu</span>
+                  </button>
                 </Link>
             </div>
           </div>

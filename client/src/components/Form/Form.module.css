@@ -61,12 +61,13 @@
 
 
 .formTitle{
+    margin: 0;
     text-align: center;
     background: linear-gradient(to right, #9500ff, #09f, #00ddff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Kanit';
-    font-size: 3vh;
+    font-size: 4vh;
     font-weight: 900;
     text-align: center;
 }
@@ -83,8 +84,8 @@
 
 .inputBox{
     margin: .5vh;
-    max-width: 90%;
-    min-width: 90%;
+    max-width: 85%;
+    min-width: 85%;
 }
 
 .inputBox2{
@@ -106,6 +107,7 @@
  align-items: center;
 }
 .formButton {
+    margin: 0 .5vw;
     border: 0;
     background-image: linear-gradient(
       150deg,
@@ -125,6 +127,10 @@
       background-color: #111;
       padding: .5vh 1vh;
       transition: .3s;
+    }
+
+    .textButton:hover{
+        background: none;
     }
 
 .Form{
@@ -150,7 +156,13 @@ p{
     overflow-y: scroll;
 }
 
-@media (max-width: 800px) {
+.textAlert{
+    font-size: 2vh;
+    margin-left: .5vw;
+    color: red;
+}
+
+@media (max-width: 1340px) {
     .modalFormContainer{
         width: 60vw;
     }
@@ -168,6 +180,6 @@ p{
     }
 
     .inputContainer{
-        width: 70vw;
+        width: 60vw;
     }
 }

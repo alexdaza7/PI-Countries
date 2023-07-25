@@ -2,11 +2,8 @@ import styles from './SideBar.module.css'
 import React, { useState, useEffect } from "react";
 import {useDispatch, useSelector } from "react-redux";
 import { setFilteredcountries, getActivities, setCountries, formActive} from '../../redux/actions';
-import { Link } from 'react-router-dom';
-import SubMenu from './SubMenu/SubMenu';
 import earth from '../../assets/earth.png'
 import arrow from '../../assets/arrow.png'
-import home from '../../assets/home.png'
 import list from '../../assets/list.png'
 import filter from '../../assets/filter.png'
 import filter2 from '../../assets/filter2.png'
@@ -15,8 +12,14 @@ import create from '../../assets/tab.png'
 export default function SideBar(props){
 
     const def =['Asia','Americas','Africa','Europe','Oceania','Antarctic']
-    const continents = [{name:'ASIA', id:'Asia'}, {name:'AMERICA', id:'Americas'}, {name:'AFRICA', id:'Africa'},
-    {name:'ANTARTIDA', id:'Antarctic'},{name:'EUROPA', id:'Europe'},{name:'OCEANIA', id:'Oceania'}]
+    const continents = [
+        {name:'ASIA', id:'Asia'}, 
+        {name:'AMERICA', id:'Americas'}, 
+        {name:'AFRICA', id:'Africa'},
+        {name:'ANTARTIDA', id:'Antarctic'},
+        {name:'EUROPA', id:'Europe'},
+        {name:'OCEANIA', id:'Oceania'}
+    ]
     const options=[
         {name:'Sin orden especifico', id:'noOrder'},
         {name:'Ascendente por Nombre', id:'ascByName'},
@@ -33,11 +36,18 @@ export default function SideBar(props){
     const allActivities = useSelector(state=>state.allActivities)
     const formStatus = useSelector(state=>state.formStatus)
 
+    // Estos son estados para controlar la barra lateral
+    const [inactive,setIianctive]=useState(true)
+    const [orderExpanded,setOrderExpanded]=useState(false)
+    const [filterExpanded,setFiilterExpanded]=useState(false)
+    const [activitiesExpanded,setActivitiesExpanded]=useState(false)
+
     //este efecto es para cargar por primera vez el array de paises
     useEffect(()=>{
         dispatch(getActivities())
+        console.log(allActivities)
         deleteFilter()
-    },[formStatus])
+    },[formStatus,activitiesExpanded])
     //esta funcion es para guardar cuales son los filtros de continentes aplicados al presionar un checkbox
     const filterCountries= (event) =>{
         const {checked}=event.target
@@ -50,10 +60,10 @@ export default function SideBar(props){
     }
     //esta funcion es para guardar cuales son los filtros de actividades aplicados al presionar un checkbox
     const filterActivities= (event) =>{
-        setCheckActivities([]);
+        // setCheckActivities([]);
         const {checked}=event.target
         let activity = allActivities.find(act => act.id === Number(event.target.id))
-        console.log(checkActivities)
+        console.log(activity)
         if(checked){
             setCheckActivities([...checkActivities, activity]);
         }else {
@@ -69,7 +79,6 @@ export default function SideBar(props){
             deleteFilter()
             return
         }
-        console.log(checkCountries)
         if(checkCountries.length===0) {
             dispatch(setFilteredcountries(countries,def,checkActivities))
             return
@@ -93,11 +102,6 @@ export default function SideBar(props){
          dispatch(setCountries(query));
     }
 
-    const [inactive,setIianctive]=useState(true)
-    const [orderExpanded,setOrderExpanded]=useState(false)
-    const [filterExpanded,setFiilterExpanded]=useState(false)
-    const [activitiesExpanded,setActivitiesExpanded]=useState(false)
-
 
     return(
         <div className={`${styles.sideMenu} ${inactive? styles.inactive: ''}`}>
@@ -116,29 +120,24 @@ export default function SideBar(props){
                 </div>
             </div>
             
-            <div className={styles.divider}></div>
-
             <div className={styles.mainMenu}>
                 <ul>
-                    {/* <li>
-                        <a className={styles.menuItem}>                        
-                        <div className={styles.menuIcon}>
-                            <img src={home} alt="home icon" />
-                        </div>
-                        <span>INICIO</span>
-                        </a>
-                    </li> */}
                     <li>
-                        <a className={styles.menuItem}>                            
+                        <span className={styles.menuItem}>                            
                         <div className={styles.menuIcon}>
                             <img src={create} alt="create icon" />  
                         </div>
-                        <span onClick={()=>dispatch(formActive(true))}>CREAR ACTIVIDAD</span>
-                        </a>
+                        <span onClick={()=>
+                            {dispatch(formActive(true))
+                            setOrderExpanded(false)
+                            setFiilterExpanded(false);
+                            setActivitiesExpanded(false);
+                            }}>CREAR ACTIVIDAD</span>
+                        </span>
                     </li>
                     <li>
                         <div>
-                        <a onClick={()=>{
+                        <span onClick={()=>{
                             setOrderExpanded(!orderExpanded)
                             setFiilterExpanded(false);
                             setActivitiesExpanded(false);}} 
@@ -148,7 +147,7 @@ export default function SideBar(props){
                                 <img src={list} alt="list icon" />
                             </div>
                             <span>ORDENAR</span>
-                        </a>
+                        </span>
                         <ul className={`${styles.subMenu} ${orderExpanded ? styles.active: '' }`}>
                             <button onClick={applyFilters}>ORDENAR</button>
                         {
@@ -165,7 +164,7 @@ export default function SideBar(props){
                         </div>
                     </li>
                     <li>
-                        <a onClick={()=>{
+                        <span onClick={()=>{
                             setOrderExpanded(false)
                             setFiilterExpanded(!filterExpanded);
                             setActivitiesExpanded(false);}} 
@@ -174,7 +173,7 @@ export default function SideBar(props){
                                 <img src={filter} alt="filter icon" />
                             </div>
                             <span>FILTRO POR CONTINENTES</span>
-                        </a>
+                        </span>
                         <ul className={`${styles.subMenu} ${filterExpanded ? styles.active: '' }`}>
                             <button onClick={deleteFilter}>X</button>
                             <button onClick={applyFilters}>✔</button>
@@ -191,7 +190,7 @@ export default function SideBar(props){
                         </ul>
                     </li>
                     <li>
-                    <a onClick={()=>{
+                    <span onClick={()=>{
                             setOrderExpanded(false)
                             setFiilterExpanded(false);
                             setActivitiesExpanded(!activitiesExpanded);}} 
@@ -200,7 +199,7 @@ export default function SideBar(props){
                                 <img src={filter2} alt="filter icon" />
                             </div>
                         <span>FILTRO POR ACTIVIDADES</span>
-                        </a>
+                    </span>
                         <ul className={`${styles.subMenu} ${activitiesExpanded ? styles.active: '' }`}>
                             <button onClick={deleteFilter}>X</button>
                             <button onClick={applyFilters}>✓</button>
@@ -208,7 +207,7 @@ export default function SideBar(props){
                                 return(
                                 <li key={activity.id}>
                                     <input type="checkbox" id={activity.id} name={activity.name} value={activity.name} onChange={filterActivities}/>
-                                    <label htmlFor={activity.id}>{activity.name}</label>  
+                                    <label htmlFor={activity.id}>{activity.name.toUpperCase()}</label>  
                                 </li>)
                             })
                             }
@@ -220,79 +219,3 @@ export default function SideBar(props){
     )
 
 }
-
-{/* <li>
-<a className={styles.menuItem}>                        
-<div className={styles.menuIcon}>
-    <img src={filter2} alt="filter icon" />
-</div>
-<span>ELIMINAR FILTROS</span>
-</a>
-</li> */}
-
-
-{/* <div className={styles.container}>
-<div className={styles.filterContainer}>
-
-    <br />
-    <button onClick={applyFilters}>ORDENAR</button>
-    <br />
-        <input type="radio" id='noOrder' name='order' value='noOrder' onChange={setOrder}/>
-            <label htmlFor="noOrder">Sin orden especifico</label>  
-    <br />
-        <input type="radio" id='ascByName' name='order' value='ascByName' onChange={setOrder}/>
-            <label htmlFor="ascByName">Ascendente por Nombre</label>  
-    <br />
-    <input type="radio" id='dscByName' name='order' value='dscByName' onChange={setOrder}/>
-            <label htmlFor="dscByName">Descendente por Nombre</label>  
-    <br />
-    <input type="radio" id='ascByPob' name='order' value='ascByPob' onChange={setOrder}/>
-            <label htmlFor="ascByPob">Ascendente por Poblacion</label>  
-    <br />
-    <input type="radio" id='dscByPob' name='order' value='dscByPob' onChange={setOrder}/>
-            <label htmlFor="dscByPob">Descendente por Poblacion</label>  
-    <br />
-    <button onClick={applyFilters}>APLICAR FILTROS</button>
-    <h3>CONTINENTES</h3>
-    <form action="">
-        <input type="checkbox" id='Africa' name='Africa' value='Africa' onChange={filterCountries}/>
-        <label htmlFor="Africa">AFRICA</label>  
-        <br/>
-        <input type="checkbox" id='Americas' name='Americas' value='Americas' onChange={filterCountries}/>
-        <label htmlFor="Americas">AMERICA</label> 
-        <br/>
-        <input type="checkbox" id='Antarctic' name='Antarctic' value='Antarctic' onChange={filterCountries}/>
-        <label htmlFor="Antarctic">ANTARTIDA</label> 
-        <br/>
-        <input type="checkbox" id='Asia' name='Asia' value='Asia' onChange={filterCountries}/>
-        <label htmlFor="Asia">ASIA</label> 
-        <br/>
-        <input type="checkbox" id='Europe' name='Europe' value='Europe' onChange={filterCountries}/>
-        <label htmlFor="Europe">EUROPA</label> 
-        <br/>
-        <input type="checkbox" id='Oceania' name='Oceania' value='Oceania' onChange={filterCountries}/>
-        <label htmlFor="Oceania">OCEANIA</label> <br/>
-    </form>
-    <hr />
-    <h3>ACTIVIDADES</h3>
-    <form action="">
-        {allActivities.map(activity => {
-            return(
-                <div key={activity.id}>
-                    <input type="checkbox" id={activity.id} name={activity.name} value={activity.name} onChange={filterActivities}/>
-                    <label htmlFor={activity.id}>{activity.name}</label>  
-                    <br/> 
-                </div>
-            )
-        })
-        }
-    </form>
-    <br />
-    <button onClick={deleteFilter}>ELIMINAR FILTROS</button>
-    <br />
-</div>
-
-<Cards filteredCountries={filteredCountries}/>
-
-
-</div> */}

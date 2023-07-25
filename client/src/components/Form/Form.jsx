@@ -9,6 +9,7 @@ export default function Form(){
 
     const dispatch = useDispatch()
     const formStatus = useSelector(state=>state.formStatus)
+    const allActivities = useSelector(state=>state.allActivities)
 
     useEffect(()=>{
         setNewActivity({        
@@ -47,7 +48,7 @@ export default function Form(){
         setValidation(validator({
             ...newActivity,
             [event.target.name]: event.target.value
-        }))
+        },allActivities))
     }
 
     const handleSelectChange = (event)=>{

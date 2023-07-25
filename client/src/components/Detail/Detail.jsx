@@ -17,24 +17,24 @@ export default function Detail (){
 
     return (
       <section id='modal' className={styles.modal}>
-          <div className={styles.modal__container}>
-            <div className={styles.modal__imageContainer}>
-              <h2 className={styles.modal__title}>{detailCountry.name}</h2>
-              <img className={styles.modal__img} src={detailCountry.flagImage} alt="" />
-              <h2 className={styles.modal__ide}>{detailCountry.ide}</h2>
+          <div className={styles.modalContainer}>
+            <div className={styles.modalImageContainer}>
+              <h2 className={styles.modalTitle}>{detailCountry.name}</h2>
+              <img className={styles.modalImg} src={detailCountry.flagImage} alt="Imagen de la bandera del pais" />
+              <h2 className={styles.modalIde}>{detailCountry.ide}</h2>
             </div>
-            <div className={styles.modal__informationContainer}>
+            <div className={styles.modalInformationContainer}>
                 <div>
-                  <h2 className={styles.modal__informationTitle}>INFORMACION:</h2>
-                  <h3 className={styles.modal__information}>Continente: {detailCountry.region}</h3>
-                  <h3 className={styles.modal__information}>Capital: {detailCountry.capital}</h3>
-                  <h3 className={styles.modal__information}>Sub Region: {detailCountry.subregion}</h3>
-                  <h3 className={styles.modal__information}>Area: {detailCountry.area} m2</h3>
-                  <h3 className={styles.modal__information}>Poblacion: {detailCountry.population} hab</h3>
+                  <h2 className={styles.modalInformationTitle}>INFORMACION:</h2>
+                  <h3 className={styles.modalInformation}>Continente: {detailCountry.region}</h3>
+                  <h3 className={styles.modalInformation}>Capital: {detailCountry.capital}</h3>
+                  <h3 className={styles.modalInformation}>Sub Region: {detailCountry.subregion}</h3>
+                  <h3 className={styles.modalInformation}>Area: {detailCountry.area} m2</h3>
+                  <h3 className={styles.modalInformation}>Poblacion: {detailCountry.population} hab</h3>
                 </div>
                 <Link  strict to={`/home`}>
-                  <button className={styles.modal__closeContainer} >
-                    <span className={styles.modal__close} >Volver al menu</span>
+                  <button className={styles.modalCloseContainer} >
+                    <span className={styles.modalClose} >Volver al menu</span>
                   </button>
                 </Link>
             </div>

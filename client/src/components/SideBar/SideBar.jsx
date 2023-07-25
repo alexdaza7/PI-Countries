@@ -45,7 +45,6 @@ export default function SideBar(props){
     //este efecto es para cargar por primera vez el array de paises
     useEffect(()=>{
         dispatch(getActivities())
-        console.log(allActivities)
         deleteFilter()
     },[formStatus,activitiesExpanded])
     //esta funcion es para guardar cuales son los filtros de continentes aplicados al presionar un checkbox
@@ -63,7 +62,6 @@ export default function SideBar(props){
         // setCheckActivities([]);
         const {checked}=event.target
         let activity = allActivities.find(act => act.id === Number(event.target.id))
-        console.log(activity)
         if(checked){
             setCheckActivities([...checkActivities, activity]);
         }else {
@@ -98,7 +96,6 @@ export default function SideBar(props){
     // esta funcion es para los filtros de ordenamiento
     function setOrder (event){
         let query = `${event.target.value}=yes`
-        console.log(query)
          dispatch(setCountries(query));
     }
 

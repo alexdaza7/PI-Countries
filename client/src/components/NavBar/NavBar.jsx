@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from './NavBar.module.css';
-import { NavLink } from 'react-router-dom';
 import {useDispatch, useSelector } from "react-redux";
 import {setSearchedCountry, setFilteredcountries} from '../../redux/actions'
 import next from '../../assets/next.png'
@@ -33,7 +32,6 @@ export default function NavBar (props){
 
    //Esta funcion es para hacer el dispatch de los resultados obtenidos en la busqueda
    function disp (){
-      console.log(search)
       if(search !==''){
          dispatch(setFilteredcountries(searchedCountries))
       } else{
@@ -46,11 +44,11 @@ export default function NavBar (props){
    <div>
       <h1 className={styles.title}>COUNTRIES</h1>
     <nav className={styles.searchBar}>
-         <img src={prev} className={styles.prevButton}onClick={previousPage}/>
-         <input className={styles.SearchBox} onChange={getName} placeholder='Escribe el nombre de tu pais...' type='search'/>
+         <img src={prev} className={styles.prevButton}onClick={previousPage} alt="Boton de retroceder"/>
+         <input className={styles.SearchBox} autoComplete="off" onChange={getName} placeholder='Escribe el nombre de tu pais...' type='search'/>
          <button className={styles.cancelButton} onClick={deleteSearch}>X</button>
          <button className={styles.searchButton} onClick={disp}>🔍︎</button>
-         <img src={next} className={styles.nextButton} onClick={nextPage}/>
+         <img src={next} className={styles.nextButton} onClick={nextPage} alt="Boton de avanzar"/>
     </nav>
    </div>
     )

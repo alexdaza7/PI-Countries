@@ -36,7 +36,7 @@ export default function Cards(){
         <div className={`${styles.allContainer} ${formStatus? styles.active : '' }`}>
             <div className={styles.navContainer}>
             <NavBar previousPage={previousPage} nextPage={nextPage}/>
-            <p className={styles.paginado}>esta es la pagina {(page/10)} de {Math.ceil(filteredCountries.length/10)}</p>
+            <p className={styles.paginado}>esta es la pagina {(page==0?1:page/10)} de {Math.ceil(filteredCountries.length/10)}</p>
             <p className={styles.paginado}>Paises totales: {filteredCountries.length}</p>
             </div>
 
